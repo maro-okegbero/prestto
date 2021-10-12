@@ -4,18 +4,22 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 import jwt
 
-
 # Create your models here.
 from prestto.settings import SECRET_KEY
 
 
 class User(AbstractUser):
     """ The general User model """
-    first_name = models.CharField(null=True, blank=True, max_length=200)
-    last_name = models.CharField(null=True, blank=True, max_length=200)
+    first_name = models.CharField(null=True, blank=True, max_length=1000)
+    last_name = models.CharField(null=True, blank=True, max_length=1000)
     phone_number = models.CharField(max_length=12, blank=True, null=True, unique=True)
     email_authenticated = models.BooleanField(default=False)
-    is_partner = models.BooleanField(default=False)
+
+    # for partner accounts
+    business_name = models.CharField(null=True, blank=True, max_length=1000)
+    business_email = models.CharField(null=True, blank=True, max_length=1000)
+    is_partner = models.BooleanField(null=True, blank=True, max_length=200, default=False)
+
     # A timestamp representing when this object was created.
     created_at = models.DateTimeField(auto_now_add=True)
     # A timestamp representing when this object was last updated.
@@ -58,4 +62,4 @@ class User(AbstractUser):
         return self._generate_jwt_token()
 
     def __str__(self):
-        return self.get_full_name
+        return self.business_name if self.is_partner else self.get_full_name
