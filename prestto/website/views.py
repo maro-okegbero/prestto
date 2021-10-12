@@ -9,4 +9,4 @@ def homepage(request):
     :param request:
     :return:
     """
-    return render(request, template_name="website/index.html", context=dict())
+    return render(request, template_name="website/index.html")
