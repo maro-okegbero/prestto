@@ -10,3 +10,12 @@ def homepage(request):
     :return:
     """
     return render(request, template_name="website/index.html")
+
+
+def sign_up(request):
+    pass
+
+
+def sign_in(request):
+    pass
+
