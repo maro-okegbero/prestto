@@ -31,5 +31,28 @@ class RegisterUserForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ['username',
-                  'phone_number', 'first_name', 'last_name', 'email', 'business_name',
+                  'phone_number', 'first_name', 'last_name', 'email',
+                  'password1', 'password2']
+
+
+class RegisterPartnerForm(UserCreationForm):
+
+    username = forms.CharField(max_length=30, required=True, label="Username",
+                               widget=forms.TextInput(attrs={'id': 'username',
+                                                             'name': 'username', }))
+
+    business_name = forms.CharField(max_length=30, required=True, label="Business Name",
+                                    widget=forms.TextInput(attrs={'id': 'business_name',
+                                                                  'name': 'business_name', }))
+
+    business_email = forms.EmailField(max_length=254, required=True, label="Business Email",
+                                      widget=forms.EmailInput(attrs={'id': 'business_email'}))
+
+    phone_number = forms.CharField(max_length=11, required=True, label="Phone Number",
+                                   widget=forms.TextInput(attrs={'id': 'phone_number'}))
+
+    class Meta:
+        model = get_user_model()
+        fields = ['username',
+                  'phone_number', 'business_email', 'business_name',
                   'password1', 'password2']
