@@ -16,6 +16,9 @@ def sign_up(request):
     pass
 
 
-def sign_in(request):
+def partner_sign_up(request):
     pass
 
+
+def sign_in(request):
+    pass
