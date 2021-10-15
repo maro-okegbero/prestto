@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from .form import *
 
 
 # Create your views here.
@@ -13,7 +15,25 @@ def homepage(request):
 
 
 def sign_up(request):
-    pass
+    if request.user.is_authenticated:
+        return redirect(homepage)
+    form = RegisterUserForm()
+
+    if request.method == "POST":
+        form = RegisterUserForm(request.POST, auto_id=True)
+
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password_1")
+
+            # todo : send email
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect(homepage)
+
+    return render(request, )
 
 
 def partner_sign_up(request):
