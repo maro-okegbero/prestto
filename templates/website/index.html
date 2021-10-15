@@ -222,10 +222,10 @@
             <div class="masonry">
                 <div class="masonry__brick" data-aos="fade-up">
                     <div class="item-folio">
-                        <div class="item-folio__thumb"><a href="images/portfolio/gallery/g-shutterbug.jpg"
-                                                          class="thumb-link" title="Shutterbug" data-size="1050x700">
-                            <img src="images/portfolio/xlady-shutterbug.jpg.pagespeed.ic.VVxO5mw-ZR.jpg"
-                                 srcset="images/portfolio/xlady-shutterbug.jpg.pagespeed.ic.VVxO5mw-ZR.jpg 1x, images/portfolio/lady-shutterbug@2x.jpg 2x"
+                        <div class="item-folio__thumb"><a class="thumb-link" title="Shutterbug" data-size="1050x700" href={% static "images/portfolio/gallery/g-shutterbug.jpg" %}
+                                                            >
+                            <img src={% static "images/portfolio/xlady-shutterbug.jpg.pagespeed.ic.VVxO5mw-ZR.jpg" %}
+                                 srcset= {% static "images/portfolio/xlady-shutterbug.jpg.pagespeed.ic.VVxO5mw-ZR.jpg" %}
                                  alt=""> </a></div>
                         <div class="item-folio__text"><h3 class="item-folio__title"> Shutterbug</h3>
                             <p class="item-folio__cat"> Branding</p></div>
@@ -237,9 +237,9 @@
                 </div>
                 <div class="masonry__brick" data-aos="fade-up">
                     <div class="item-folio">
-                        <div class="item-folio__thumb"><a href="images/portfolio/gallery/g-woodcraft.jpg"
+                        <div class="item-folio__thumb"><a href={% static "images/portfolio/gallery/g-woodcraft.jpg" %}
                                                           class="thumb-link" title="Woodcraft" data-size="1050x700">
-                            <img src="images/portfolio/xwoodcraft.jpg.pagespeed.ic.CB3PZxDPVe.jpg"
+                            <img src={% static "images/portfolio/xwoodcraft.jpg.pagespeed.ic.CB3PZxDPVe.jpg" %}
                                  srcset="images/portfolio/xwoodcraft.jpg.pagespeed.ic.CB3PZxDPVe.jpg 1x, images/portfolio/woodcraft@2x.jpg 2x"
                                  alt=""> </a></div>
                         <div class="item-folio__text"><h3 class="item-folio__title"> Woodcraft</h3>
