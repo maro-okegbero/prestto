@@ -356,7 +356,7 @@
                 <div class="testimonials__slide"><p>Repellat dignissimos libero. Qui sed at corrupti expedita voluptas
                     odit. Nihil ea quia nesciunt. Ducimus aut sed ipsam. Autem eaque officia cum exercitationem sunt
                     voluptatum accusamus. Quasi voluptas eius distinctio.</p><img
-                        src="images/avatars/xuser-02.jpg.pagespeed.ic.h9SZyNXnWw.jpg" alt="Author image"
+                        src={% static "images/avatars/xuser-02.jpg.pagespeed.ic.h9SZyNXnWw.jpg" %} alt="Author image"
                         class="testimonials__avatar">
                     <div class="testimonials__info"><span class="testimonials__name">Satya Nadella</span> <span
                             class="testimonials__pos">CEO, Microsoft</span></div>
@@ -501,10 +501,9 @@
         </div>
     </div>
 </div>
-<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/main.js"></script>
+<script src={% static "js/jquery-3.2.1.min.js" %}></script>
+<script src={% static "js/plugins.js" %}></script>
+<script src={% static "js/main.js" %}></script>
 <script defer src="../../../static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"rayId":"69e19c274e8440e3","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.9.0","si":100}'></script>
 </body>
