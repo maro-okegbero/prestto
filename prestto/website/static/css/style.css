@@ -1,6 +1,5 @@
 /*
- * Solution by GetTemplates.co
- * URL: https://GetTemplates.co
+Prestto
  */
 @font-face {
   font-family: "Lato-Regular";
@@ -39,7 +38,7 @@
   src: url(../fonts/OpenSans-Semibold.ttf);
 }
 p {
-  font-family: "OpenSans-Regular";
+  font-family: "OpenSans-Regular", serif;
   color: #666666;
   font-size: 18px;
 }
