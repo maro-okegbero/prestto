@@ -96,8 +96,8 @@ class IndividualOwner(models.Model):
 
 class CorporateOwner(models.Model):
     """
-
     """
+
 
 
 class BusinessName(models.Model):
