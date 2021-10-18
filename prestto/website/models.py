@@ -66,6 +66,12 @@ class User(AbstractUser):
         return self.business_name if self.is_partner else self.get_full_name
 
 
+class ExtraDocument(models.Model):
+    """
+
+    """
+    document = CloudinaryField('pdf', null=False, blank=False)
+
 
 class IndividualOwner(models.Model):
     """
@@ -85,39 +91,30 @@ class IndividualOwner(models.Model):
     identification = CloudinaryField('pdf', null=False, blank=False)
     signature = CloudinaryField('image', null=False, blank=False)
     photograph = CloudinaryField('image', null=False, blank=False)
-    other_documents = models.ManyToManyField()
+    other_documents = models.ManyToManyField(ExtraDocument)
+
+
 
 
 class BusinessName(models.Model):
     """
     BusinessName registration object
     """
-    proposed_business_name = models.CharField(max_length=500, null=False, blank=False)  # the name the business will be called and  registered with legally
-    proposed_company_name = models.CharField(max_length=500, null=False, blank=False)  # the alternative if your proposed business name is unavailable
+    proposed_business_name = models.CharField(max_length=500, null=False,
+                                              blank=False)  # the name the business will be called and  registered with legally
+    proposed_company_name = models.CharField(max_length=500, null=False,
+                                             blank=False)  # the alternative if your proposed business name is unavailable
     business_phone_number = models.CharField(max_length=12, null=False, blank=False)  # the phone number
     business_email = models.EmailField(max_length=12, null=False, blank=False)
     business_address = models.CharField(max_length=1000, null=False, blank=False)
     state = models.CharField(max_length=100, null=False, blank=False)
     nature_of_business = models.TextField(max_length=1000, null=False, blank=False)
-    business_commencement_date = models.DateField(null=False, blank=False)  # cannot be more than 40 days from the date_created
+    business_commencement_date = models.DateField(null=False,
+                                                  blank=False)  # cannot be more than 40 days from the date_created
     is_individual_owner = models.BooleanField(null=False, blank=False)
     is_corporate_owner = models.BooleanField(null=False, blank=False)
-
-    # individual owner information
-    surname = models.CharField(max_length=200, blank=False, null=False)
-    first_name = models.CharField(max_length=200, blank=True, null=False)
-    other_name = models.CharField(max_length=200, blank=True, null=False)
-    date_of_birth = models.DateField(null=False, blank=False)
-    gender = models.CharField(max_length=100, null=False, blank=False)
-    nationality = models.CharField(max_length=100, null=False, blank=False)
-    occupation = models.CharField(max_length=100, null=False, blank=False)
-    phone_number = models.CharField(max_length=12, null=False, blank=False)  # the phone number
-    email = models.EmailField(max_length=12, null=False, blank=False)
-    residential_address = models.CharField(max_length=1000, null=False, blank=False)
-    means_of_identification = models.CharField(max_length=100, null=False, blank=False)
-
+    individual_owner = models.ForeignKey(IndividualOwner, on_delete=models.CASCADE)
+    corporate_owner = models.ForeignKey(IndividualOwner, on_delete=models.CASCADE)
 
     date_created = models.DateTimeField(default=datetime.now())
     last_created = models.DateTimeField(default=datetime.now())
-
-
