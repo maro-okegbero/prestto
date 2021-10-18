@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 import jwt
@@ -63,6 +64,28 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.business_name if self.is_partner else self.get_full_name
+
+
+
+class IndividualOwner(models.Model):
+    """
+
+    """
+    surname = models.CharField(max_length=200, blank=False, null=False)
+    first_name = models.CharField(max_length=200, blank=True, null=False)
+    other_name = models.CharField(max_length=200, blank=True, null=False)
+    date_of_birth = models.DateField(null=False, blank=False)
+    gender = models.CharField(max_length=100, null=False, blank=False)
+    nationality = models.CharField(max_length=100, null=False, blank=False)
+    occupation = models.CharField(max_length=100, null=False, blank=False)
+    phone_number = models.CharField(max_length=12, null=False, blank=False)  # the phone number
+    email = models.EmailField(max_length=12, null=False, blank=False)
+    residential_address = models.CharField(max_length=1000, null=False, blank=False)
+    means_of_identification = models.CharField(max_length=100, null=False, blank=False)
+    identification = CloudinaryField('pdf', null=False, blank=False)
+    signature = CloudinaryField('image', null=False, blank=False)
+    photograph = CloudinaryField('image', null=False, blank=False)
+    other_documents = models.ManyToManyField()
 
 
 class BusinessName(models.Model):
