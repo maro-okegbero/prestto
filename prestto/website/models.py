@@ -63,3 +63,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.business_name if self.is_partner else self.get_full_name
+
+
+class BusinessName
