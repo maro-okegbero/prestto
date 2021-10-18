@@ -94,6 +94,10 @@ class IndividualOwner(models.Model):
     other_documents = models.ManyToManyField(ExtraDocument)
 
 
+class CorporateOwner(models.Model):
+    """
+
+    """
 
 
 class BusinessName(models.Model):
