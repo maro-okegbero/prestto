@@ -72,13 +72,14 @@ class BusinessName(models.Model):
     proposed_business_name = models.CharField(max_length=500, null=False, blank=False)  # the name the business will be called and  registered with legally
     proposed_company_name = models.CharField(max_length=500, null=False, blank=False)  # the alternative if your proposed business name is unavailable
     business_phone_number = models.CharField(max_length=12, null=False, blank=False)  # the phone number
-    email = models.EmailField(max_length=12, null=False, blank=False)  # the phone number
+    business_email = models.EmailField(max_length=12, null=False, blank=False)
     business_address = models.CharField(max_length=1000, null=False, blank=False)
     state = models.CharField(max_length=100, null=False, blank=False)
     nature_of_business = models.TextField(max_length=1000, null=False, blank=False)
     business_commencement_date = models.DateField(null=False, blank=False)  # cannot be more than 40 days from the date_created
     is_individual_owner = models.BooleanField(null=False, blank=False)
     is_corporate_owner = models.BooleanField(null=False, blank=False)
+
     # individual owner information
     surname = models.CharField(max_length=200, blank=False, null=False)
     first_name = models.CharField(max_length=200, blank=True, null=False)
@@ -86,7 +87,8 @@ class BusinessName(models.Model):
     date_of_birth = models.DateField(null=False, blank=False)
     gender = models.CharField(max_length=100, null=False, blank=False)
     nationality = models.CharField(max_length=100, null=False, blank=False)
-    nationality = models.CharField()
+    phone_number = models.CharField(max_length=12, null=False, blank=False)  # the phone number
+    email = models.EmailField(max_length=12, null=False, blank=False)
 
     date_created = models.DateTimeField(default=datetime.now())
     last_created = models.DateTimeField(default=datetime.now())
