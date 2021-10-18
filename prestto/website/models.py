@@ -65,4 +65,7 @@ class User(AbstractUser):
         return self.business_name if self.is_partner else self.get_full_name
 
 
-class BusinessName
+class BusinessName(models.Model):
+    """
+    BusinessName registration object
+    """
