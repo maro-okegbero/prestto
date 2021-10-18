@@ -69,6 +69,10 @@ class BusinessName(models.Model):
     """
     BusinessName registration object
     """
-    proposed_business_name = models.CharField(max_length=1000, null=False, blank=False)  # the name the business will be called and  registered with legally
-    proposed_company_name = models.CharField(max_length=1000, null=False, blank=False)  # the alternative if your proposed business name is unavailable
-    phone_number = models.CharField(max_length=12, null=False, blank=False)  # the alternative if your proposed business name is unavailable
+    proposed_business_name = models.CharField(max_length=500, null=False, blank=False)  # the name the business will be called and  registered with legally
+    proposed_company_name = models.CharField(max_length=500, null=False, blank=False)  # the alternative if your proposed business name is unavailable
+    phone_number = models.CharField(max_length=12, null=False, blank=False)  # the phone number
+    business_address = models.CharField(max_length=1000, null=False, blank=False)
+    state = models.CharField(max_length=100, null=False, blank=False)
+    nature_of_business = models.TextField(max_length=1000, null=False, blank=False)
+
