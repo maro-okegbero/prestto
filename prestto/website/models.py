@@ -87,8 +87,12 @@ class BusinessName(models.Model):
     date_of_birth = models.DateField(null=False, blank=False)
     gender = models.CharField(max_length=100, null=False, blank=False)
     nationality = models.CharField(max_length=100, null=False, blank=False)
+    occupation = models.CharField(max_length=100, null=False, blank=False)
     phone_number = models.CharField(max_length=12, null=False, blank=False)  # the phone number
     email = models.EmailField(max_length=12, null=False, blank=False)
+    residential_address = models.CharField(max_length=1000, null=False, blank=False)
+    means_of_identification = models.CharField(max_length=100, null=False, blank=False)
+
 
     date_created = models.DateTimeField(default=datetime.now())
     last_created = models.DateTimeField(default=datetime.now())
