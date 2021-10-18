@@ -76,5 +76,5 @@ class BusinessName(models.Model):
     business_address = models.CharField(max_length=1000, null=False, blank=False)
     state = models.CharField(max_length=100, null=False, blank=False)
     nature_of_business = models.TextField(max_length=1000, null=False, blank=False)
-    business_commencement_date = models.DateField(null=False, blank=False)
+    business_commencement_date = models.DateField(null=False, blank=False)  # cannot be more than 40 days from the date_created
 
