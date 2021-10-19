@@ -124,6 +124,7 @@ class Atteste(models.Model):
     email = models.EmailField(max_length=12, null=False, blank=False)
     residential_address = models.CharField(max_length=1000, null=False, blank=False)
     means_of_identification = models.CharField(max_length=100, null=False, blank=False)
+    identification_number = models.CharField(max_length=100, null=False, blank=False)
 
 
 class BusinessName(models.Model):
