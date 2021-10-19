@@ -97,7 +97,17 @@ class IndividualOwner(models.Model):
 class CorporateOwner(models.Model):
     """
     """
-
+    registration_number = models.CharField(max_length=200, blank=False, null=False)
+    name_of_authorized_signatory = models.CharField(max_length=200, blank=False, null=False)
+    residential_address = models.CharField(max_length=1000, null=False, blank=False)
+    gender = models.CharField(max_length=100, null=False, blank=False)
+    email = models.EmailField(max_length=12, null=False, blank=False)
+    phone_number = models.CharField(max_length=12, null=False, blank=False)  # the phone number
+    means_of_identification = models.CharField(max_length=100, null=False, blank=False)
+    identification = CloudinaryField('pdf', null=False, blank=False)
+    signature = CloudinaryField('image', null=False, blank=False)
+    photograph = CloudinaryField('image', null=False, blank=False)
+    other_documents = models.ManyToManyField(ExtraDocument)
 
 
 class BusinessName(models.Model):
@@ -118,7 +128,7 @@ class BusinessName(models.Model):
     is_individual_owner = models.BooleanField(null=False, blank=False)
     is_corporate_owner = models.BooleanField(null=False, blank=False)
     individual_owner = models.ForeignKey(IndividualOwner, on_delete=models.CASCADE)
-    corporate_owner = models.ForeignKey(IndividualOwner, on_delete=models.CASCADE)
+    corporate_owner = models.ForeignKey(CorporateOwner, on_delete=models.CASCADE)
 
     date_created = models.DateTimeField(default=datetime.now())
     last_created = models.DateTimeField(default=datetime.now())
