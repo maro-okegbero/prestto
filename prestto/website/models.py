@@ -146,7 +146,7 @@ class BusinessName(models.Model):
     is_corporate_owner = models.BooleanField(null=False, blank=False)
     individual_owner = models.ForeignKey(IndividualOwner, on_delete=models.CASCADE)
     corporate_owner = models.ForeignKey(CorporateOwner, on_delete=models.CASCADE)
-    attestee = models.ForeignKey(CorporateOwner, on_delete=models.CASCADE)
+    attestee = models.ForeignKey(Attestee, on_delete=models.CASCADE)
     date_created = models.DateTimeField(default=datetime.now())
     last_created = models.DateTimeField(default=datetime.now())
 
