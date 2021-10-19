@@ -110,6 +110,22 @@ class CorporateOwner(models.Model):
     other_documents = models.ManyToManyField(ExtraDocument)
 
 
+class Atteste(models.Model):
+    """
+    When the individual owner is below 18  years old
+    """
+    surname = models.CharField(max_length=200, blank=False, null=False)
+    first_name = models.CharField(max_length=200, blank=True, null=False)
+    other_name = models.CharField(max_length=200, blank=True, null=False)
+    date_of_birth = models.DateField(null=False, blank=False)
+    gender = models.CharField(max_length=100, null=False, blank=False)
+    nationality = models.CharField(max_length=100, null=False, blank=False)
+    phone_number = models.CharField(max_length=12, null=False, blank=False)  # the phone number
+    email = models.EmailField(max_length=12, null=False, blank=False)
+    residential_address = models.CharField(max_length=1000, null=False, blank=False)
+    means_of_identification = models.CharField(max_length=100, null=False, blank=False)
+
+
 class BusinessName(models.Model):
     """
     BusinessName registration object
@@ -129,6 +145,6 @@ class BusinessName(models.Model):
     is_corporate_owner = models.BooleanField(null=False, blank=False)
     individual_owner = models.ForeignKey(IndividualOwner, on_delete=models.CASCADE)
     corporate_owner = models.ForeignKey(CorporateOwner, on_delete=models.CASCADE)
-
+    attestee = models.ForeignKey(CorporateOwner, on_delete=models.CASCADE)
     date_created = models.DateTimeField(default=datetime.now())
     last_created = models.DateTimeField(default=datetime.now())
