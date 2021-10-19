@@ -112,12 +112,12 @@ class CorporateOwner(models.Model):
 
 class Attestee(models.Model):
     """
-    When the individual owner is below 18  years old
+    When the individual owner is below 18 years old abject attestee ob has to be created
     """
     surname = models.CharField(max_length=200, blank=False, null=False)
     first_name = models.CharField(max_length=200, blank=True, null=False)
     other_name = models.CharField(max_length=200, blank=True, null=False)
-    date_of_birth = models.DateField(null=False, blank=False)
+    date_of_birth = models.DateField(null=False, blank=False)  # cannot be less than 18
     gender = models.CharField(max_length=100, null=False, blank=False)
     nationality = models.CharField(max_length=100, null=False, blank=False)
     phone_number = models.CharField(max_length=12, null=False, blank=False)  # the phone number
@@ -149,3 +149,5 @@ class BusinessName(models.Model):
     attestee = models.ForeignKey(CorporateOwner, on_delete=models.CASCADE)
     date_created = models.DateTimeField(default=datetime.now())
     last_created = models.DateTimeField(default=datetime.now())
+
+
