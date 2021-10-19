@@ -110,7 +110,7 @@ class CorporateOwner(models.Model):
     other_documents = models.ManyToManyField(ExtraDocument)
 
 
-class Atteste(models.Model):
+class Attestee(models.Model):
     """
     When the individual owner is below 18  years old
     """
