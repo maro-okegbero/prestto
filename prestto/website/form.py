@@ -36,7 +36,6 @@ class RegisterUserForm(UserCreationForm):
 
 
 class RegisterPartnerForm(UserCreationForm):
-
     username = forms.CharField(max_length=30, required=True, label="Username",
                                widget=forms.TextInput(attrs={'id': 'username',
                                                              'name': 'username', }))
@@ -56,3 +55,7 @@ class RegisterPartnerForm(UserCreationForm):
         fields = ['username',
                   'phone_number', 'business_email', 'business_name',
                   'password1', 'password2']
+
+
+class BusinessNameRegistration(forms.Form):
+
