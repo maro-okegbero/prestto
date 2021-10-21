@@ -1,5 +1,16 @@
 from rest_framework import serializers
 
+from pprint import pprint
+
+from django.contrib.auth import authenticate
+from django.utils.translation import gettext_lazy, ugettext_lazy
+from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
+from .models import Question, Article, User, Game, SavedWord, SavedIdiom, Winner
+from affiliate_system.models import AffiliateInfo
+from django.db.models import ObjectDoesNotExist, __all__
+from bookchamp.utils import token_generator, generate_referral_code, send_email_verification_pin
+
 
 class UserSerializer(serializers.ModelSerializer):
     fullname = serializers.CharField(required=True)
