@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'prestto.website',
+    'prestto.api',
     'rest_framework',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +140,11 @@ cloudinary.config(
 
 )
 
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'bookchamp.backends.JWTAuthentication',
+    ],
+
+    'DEFAULT_PARSER_CLASSES': ['rest_framework.parsers.JSONParser'],
+}
