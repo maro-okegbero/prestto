@@ -18,7 +18,6 @@ class User(AbstractUser):
 
     # for partner accounts
     business_name = models.CharField(null=True, blank=True, max_length=1000)
-    business_email = models.CharField(null=True, blank=True, max_length=1000)
     is_partner = models.BooleanField(null=True, blank=True, max_length=200, default=False)
 
     # A timestamp representing when this object was created.
