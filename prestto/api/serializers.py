@@ -6,10 +6,44 @@ from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy, ugettext_lazy
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-from .models import Question, Article, User, Game, SavedWord, SavedIdiom, Winner
-from affiliate_system.models import AffiliateInfo
+from .models import *
 from django.db.models import ObjectDoesNotExist, __all__
-from bookchamp.utils import token_generator, generate_referral_code, send_email_verification_pin
+from ..utils import token_generator, generate_referral_code, send_email_verification_pin
+
+def validate_phone_number(value):
+    """
+    check that a correct phone_number was inputted
+    """
+    try:
+        _exists = User.objects.get(phone_number=value)
+    except ObjectDoesNotExist:
+        _exists = None
+
+    if len(value) != 11:
+        raise serializers.ValidationError('The length of the phone_number is incorrect')
+    elif _exists:
+        raise serializers.ValidationError('The phone_number provided is already in use!')
+
+
+def validate_gender(value):
+    """
+    checks that the correct value for gender is passed
+    """
+    if value not in ["male", "female"]:
+        raise serializers.ValidationError('Incorrect value passed for gender field')
+
+
+def validate_email(value):
+    """
+    check to see that a user exist with that email address
+    """
+    try:
+        user = User.objects.get(email=value)
+    except Exception as e:
+        print(e)
+        user = None
+    if user:
+        raise serializers.ValidationError('This email is different from the initial email')
 
 
 class UserSerializer(serializers.ModelSerializer):
