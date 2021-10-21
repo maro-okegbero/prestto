@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from pprint import pprint
-
+from django.contrib.auth import get_user_model as user_model
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy, ugettext_lazy
 from rest_framework import serializers
@@ -10,12 +10,13 @@ from .models import *
 from django.db.models import ObjectDoesNotExist, __all__
 from ..utils import token_generator, generate_referral_code, send_email_verification_pin
 
+
 def validate_phone_number(value):
     """
     check that a correct phone_number was inputted
     """
     try:
-        _exists = User.objects.get(phone_number=value)
+        _exists = user_model().objects.get(phone_number=value)
     except ObjectDoesNotExist:
         _exists = None
 
@@ -38,7 +39,7 @@ def validate_email(value):
     check to see that a user exist with that email address
     """
     try:
-        user = User.objects.get(email=value)
+        user = user_model().objects.get(email=value)
     except Exception as e:
         print(e)
         user = None
@@ -51,9 +52,10 @@ class UserSerializer(serializers.ModelSerializer):
     phone_number = serializers.CharField(validators=[validate_phone_number], required=True)
     gender = serializers.CharField(validators=[validate_gender], required=False)
     email = serializers.EmailField(required=True,
-                                   validators=[UniqueValidator(queryset=User.objects.all(), message="This username is in use, please try a different one")])
+                                   validators=[UniqueValidator(queryset=user_model().objects.all(),
+                                                               message="This username is in use, please try a different one")])
     username = serializers.CharField(required=True,
-                                     validators=[UniqueValidator(queryset=User.objects.all())], max_length=32)
+                                     validators=[UniqueValidator(queryset=user_model().objects.all())], max_length=32)
     referee = serializers.CharField(required=False)  # referral code of the affiliate marketer
     password = serializers.CharField(min_length=8, write_only=True)
 
@@ -82,7 +84,7 @@ class UserSerializer(serializers.ModelSerializer):
             except [AffiliateInfo.DoesNotExist, Exception] as e:
                 print(e, "Error for affiliate processing....................")
                 pass
-        user = User.objects.create_user(**validated_data)
+        user = user_model().objects.create_user(**validated_data)
 
         # create an affiliate profile for the user
         affiliate_info = AffiliateInfo.objects.create(user=user)
@@ -96,7 +98,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     # def validate_email_address(self, email, token):
     class Meta:
-        model = User
+        model = user_model()
         fields = ('id', 'username', 'email', 'password', 'phone_number',
                   'fullname', 'institution', 'date_of_birth', 'gender', 'token', 'points', 'image', 'email_token',
                   'referee', 'referral_code')
