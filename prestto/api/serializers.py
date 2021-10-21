@@ -26,14 +26,6 @@ def validate_phone_number(value):
         raise serializers.ValidationError('The phone_number provided is already in use!')
 
 
-def validate_gender(value):
-    """
-    checks that the correct value for gender is passed
-    """
-    if value not in ["male", "female"]:
-        raise serializers.ValidationError('Incorrect value passed for gender field')
-
-
 def validate_email(value):
     """
     check to see that a user exist with that email address
@@ -83,6 +75,4 @@ class UserSerializer(serializers.ModelSerializer):
     # def validate_email_address(self, email, token):
     class Meta:
         model = user_model()
-        fields = ('id', 'username', 'email', 'password', 'phone_number',
-                  'fullname', 'institution', 'date_of_birth', 'gender', 'token', 'points', 'image', 'email_token',
-                  'referee', 'referral_code')
+        fields = ('id', 'business_name', 'email', 'password', 'phone_number', 'token', 'image', 'email_token')
