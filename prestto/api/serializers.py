@@ -48,23 +48,18 @@ def validate_email(value):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    fullname = serializers.CharField(required=True)
+    business_name = serializers.CharField(required=True)
     phone_number = serializers.CharField(validators=[validate_phone_number], required=True)
-    gender = serializers.CharField(validators=[validate_gender], required=False)
     email = serializers.EmailField(required=True,
                                    validators=[UniqueValidator(queryset=user_model().objects.all(),
-                                                               message="This username is in use, please try a different one")])
-    username = serializers.CharField(required=True,
-                                     validators=[UniqueValidator(queryset=user_model().objects.all())], max_length=32)
-    referee = serializers.CharField(required=False)  # referral code of the affiliate marketer
+                                                               message="This email is in use, please try a different one")])
+
     password = serializers.CharField(min_length=8, write_only=True)
 
     # The client should not be able to send a token or points along with a registration
     # request. Making them read-only handles that for us.
     token = serializers.CharField(max_length=255, read_only=True)
     email_token = serializers.CharField(max_length=255, read_only=True)
-    points = serializers.IntegerField(read_only=True)
-    referral_code = serializers.CharField(read_only=True)
 
     #
     # def create(self, validated_data):
