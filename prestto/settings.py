@@ -143,7 +143,7 @@ cloudinary.config(
 REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'bookchamp.backends.JWTAuthentication',
+        'prestto.api.backends.JWTAuthentication',
     ],
 
     'DEFAULT_PARSER_CLASSES': ['rest_framework.parsers.JSONParser'],
