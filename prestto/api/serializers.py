@@ -80,10 +80,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 class LoginSerializer(serializers.Serializer):
     business_name = serializers.CharField(max_length=255, read_only=True)
-    password = serializers.CharField(max_length=128, write_only=True)
+    password = serializers.CharField(max_length=128, write_only=True, required=True)
     token = serializers.CharField(max_length=255, read_only=True)
     phone_number = serializers.CharField(read_only=True)
-    email = serializers.EmailField(read_only=True)
+    email = serializers.EmailField(required=True)
     image = serializers.URLField(read_only=True)
 
     def validate(self, data):
@@ -95,35 +95,14 @@ class LoginSerializer(serializers.Serializer):
         email = data.get('email', None)
         password = data.get('password', None)
 
-        # Raise an exception if an
-        # email is not provided.
-        if email is None:
+        try:
+            user = user_model().objects.get(email=email)
+            username = user.username
+            user = authenticate(username=username, password=password)
+        except Exception as e:
             raise serializers.ValidationError(
-                'A username  is required to log in.'
+                'A user with this email and password was not found.'
             )
-        # if "@"
-
-        # Raise an exception if a
-        # password is not provided.
-        if password is None:
-            raise serializers.ValidationError(
-                'A password is required to log in.'
-            )
-
-        # The `authenticate` method is provided by Django and handles checking
-        # for a user that matches this username/password combination.
-        user = authenticate(username=username, password=password)
-
-        # if user is none, check if the user tried logging in with the email
-        if user is None:
-            try:
-                xxx = user_model().objects.get(email=username)
-                username = xxx.username
-                user = authenticate(username=username, password=password)
-            except Exception as e:
-                raise serializers.ValidationError(
-                    'A user with this username/email and password was not found.'
-                )
 
         # Django provides a flag on our `User` model called `is_active`. The
         # purpose of this flag is to tell us whether the user has been banned
@@ -145,8 +124,6 @@ class LoginSerializer(serializers.Serializer):
             fullname=user.fullname,
             gender=user.gender,
             phone_number=user.phone_number,
-            date_of_birth=user.date_of_birth,
-            institution=user.institution,
             image=user.image
         )
         return data
