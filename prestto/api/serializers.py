@@ -82,7 +82,7 @@ class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=255)
     password = serializers.CharField(max_length=128, write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)
-    phone_number = serializers.CharField(validators=[validate_phone_number], read_only=True)
+    phone_number = serializers.CharField(read_only=True)
     email = serializers.EmailField(read_only=True)
     image = serializers.URLField(read_only=True)
 
