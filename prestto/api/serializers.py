@@ -1,9 +1,5 @@
-from rest_framework import serializers
-
-from pprint import pprint
 from django.contrib.auth import get_user_model as user_model
 from django.contrib.auth import authenticate
-from django.utils.translation import gettext_lazy, ugettext_lazy
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from django.db.models import ObjectDoesNotExist
