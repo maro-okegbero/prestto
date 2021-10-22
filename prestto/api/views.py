@@ -42,3 +42,9 @@ def login_user(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def register_business_name(request):
+    """
