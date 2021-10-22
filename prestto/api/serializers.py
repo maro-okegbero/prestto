@@ -118,11 +118,7 @@ class LoginSerializer(serializers.Serializer):
         # that we will see later on.
         data = dict(
             email=user.email,
-            username=user.username,
-            token=user.token,
-            points=user.points,
-            fullname=user.fullname,
-            gender=user.gender,
+            business_name=user.business_name,
             phone_number=user.phone_number,
             image=user.image
         )
