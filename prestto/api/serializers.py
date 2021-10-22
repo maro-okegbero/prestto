@@ -79,7 +79,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=255)
+    business_name = serializers.CharField(max_length=255, read_only=True)
     password = serializers.CharField(max_length=128, write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)
     phone_number = serializers.CharField(read_only=True)
@@ -92,12 +92,12 @@ class LoginSerializer(serializers.Serializer):
         # user in, this means validating that they've provided a username
         # and password and that this combination matches one of the users in
         # our database.
-        username = data.get('username', None)
+        email = data.get('email', None)
         password = data.get('password', None)
 
         # Raise an exception if an
         # email is not provided.
-        if username is None:
+        if email is None:
             raise serializers.ValidationError(
                 'A username  is required to log in.'
             )
