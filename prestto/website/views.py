@@ -31,9 +31,12 @@ def sign_up(request):
 
             user = authenticate(username=username, password=password)
             login(request, user)
+            if "next" in request.POST:
+                return redirect(request.POST.get("next"))
+
             return redirect(homepage)
 
-    return render(request, )
+    return render(request, 'website/')
 
 
 def partner_sign_up(request):
