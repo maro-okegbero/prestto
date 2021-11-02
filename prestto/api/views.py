@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from prestto.api.serializers import UserSerializer, LoginSerializer
+from prestto.api.serializers import UserSerializer, LoginSerializer, BusinessNameSerializer
 
 
 @csrf_exempt
@@ -48,3 +48,22 @@ def login_user(request):
 @permission_classes([AllowAny])
 def register_business_name(request):
     """
+
+    :param request:
+    :return:
+    """
+    data = request.data
+    serializer = BusinessNameSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        message = {"status": "success"}
+        return Response(message, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+
+
+

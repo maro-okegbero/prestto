@@ -1,11 +1,10 @@
-from datetime import datetime, timedelta
+import jwt
 
+from datetime import datetime, timedelta
+from django.utils import timezone
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-import jwt
-
-# Create your models here.
 from prestto.settings import SECRET_KEY
 
 
@@ -87,9 +86,9 @@ class IndividualOwner(models.Model):
     email = models.EmailField(max_length=12, null=False, blank=False)
     residential_address = models.CharField(max_length=1000, null=False, blank=False)
     means_of_identification = models.CharField(max_length=100, null=False, blank=False)
-    identification = CloudinaryField('pdf', null=False, blank=False)
-    signature = CloudinaryField('image', null=False, blank=False)
-    photograph = CloudinaryField('image', null=False, blank=False)
+    identification = CloudinaryField('pdf', null=True, blank=True)
+    signature = CloudinaryField('image', null=True, blank=True)
+    photograph = CloudinaryField('image', null=True, blank=True)
     other_documents = models.ManyToManyField(ExtraDocument)
 
 
@@ -103,9 +102,9 @@ class CorporateOwner(models.Model):
     email = models.EmailField(max_length=12, null=False, blank=False)
     phone_number = models.CharField(max_length=12, null=False, blank=False)  # the phone number
     means_of_identification = models.CharField(max_length=100, null=False, blank=False)
-    identification = CloudinaryField('pdf', null=False, blank=False)
-    signature = CloudinaryField('image', null=False, blank=False)
-    photograph = CloudinaryField('image', null=False, blank=False)
+    identification = CloudinaryField('pdf', null=True, blank=True)
+    signature = CloudinaryField('image', null=True, blank=True)
+    photograph = CloudinaryField('image', null=True, blank=True)
     other_documents = models.ManyToManyField(ExtraDocument)
 
 
@@ -121,9 +120,9 @@ class Attestee(models.Model):
     nationality = models.CharField(max_length=100, null=False, blank=False)
     phone_number = models.CharField(max_length=12, null=False, blank=False)  # the phone number
     email = models.EmailField(max_length=12, null=False, blank=False)
-    residential_address = models.CharField(max_length=1000, null=False, blank=False)
-    means_of_identification = models.CharField(max_length=100, null=False, blank=False)
-    identification_number = models.CharField(max_length=100, null=False, blank=False)
+    residential_address = models.CharField(max_length=1000, null=True, blank=True)
+    means_of_identification = models.CharField(max_length=100, null=True, blank=True)
+    identification_number = models.CharField(max_length=100, null=True, blank=True)
 
 
 class BusinessName(models.Model):
@@ -139,14 +138,11 @@ class BusinessName(models.Model):
     business_address = models.CharField(max_length=1000, null=False, blank=False)
     state = models.CharField(max_length=100, null=False, blank=False)
     nature_of_business = models.TextField(max_length=1000, null=False, blank=False)
-    business_commencement_date = models.DateField(null=False,
-                                                  blank=False)  # cannot be more than 40 days from the date_created
+    business_commencement_date = models.DateTimeField(null=False, blank=False)  # cannot be more than 40 days from the date_created
     is_individual_owner = models.BooleanField(null=False, blank=False)
     is_corporate_owner = models.BooleanField(null=False, blank=False)
-    individual_owner = models.ForeignKey(IndividualOwner, on_delete=models.CASCADE)
-    corporate_owner = models.ForeignKey(CorporateOwner, on_delete=models.CASCADE)
-    attestee = models.ForeignKey(Attestee, on_delete=models.CASCADE)
-    date_created = models.DateTimeField(default=datetime.now())
-    last_created = models.DateTimeField(default=datetime.now())
-
-
+    individual_owner = models.ForeignKey(IndividualOwner, on_delete=models.CASCADE, null=True)
+    corporate_owner = models.ForeignKey(CorporateOwner, on_delete=models.CASCADE, null=True)
+    attestee = models.ForeignKey(Attestee, on_delete=models.CASCADE, null=True)
+    date_created = models.DateTimeField(default=timezone.now())
+    last_created = models.DateTimeField(default=timezone.now())
