@@ -16,6 +16,7 @@ import cloudinary
 from decouple import config
 import dj_database_url
 import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY",  'django-insecure-$4w^ezkf!%hdc(v@^weorkb6&3(-@r2+^xx4jhu1h+7nb^09r9')
+SECRET_KEY = config("SECRET_KEY", 'django-insecure-$4w^ezkf!%hdc(v@^weorkb6&3(-@r2+^xx4jhu1h+7nb^09r9')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'prestto.urls'
@@ -155,3 +157,4 @@ REST_FRAMEWORK = {
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+django_heroku.settings(locals())
