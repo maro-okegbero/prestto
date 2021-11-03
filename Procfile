@@ -1,0 +1,1 @@
+web: gunicorn prestto.wsgi --log-file -
