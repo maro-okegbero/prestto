@@ -1,9 +1,12 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .form import *
 
 
 # Create your views here.
+from .models import BusinessName
+
 
 def homepage(request):
     """
@@ -37,6 +40,18 @@ def sign_up(request):
             return redirect(homepage)
 
     return render(request, 'website/')
+
+
+# @login_required(login_url="/")
+def admin_page(request):
+    """
+
+    :param request:
+    :return:
+    """
+    user = request.user
+    business_name_applications = BusinessName.objects.all()
+    return render(request, 'website/presto_dashboard.html', context={"business_name": business_name_applications, "loans": loans})
 
 
 def partner_sign_up(request):
