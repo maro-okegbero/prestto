@@ -6,8 +6,10 @@ urlpatterns = [
 
     path('', homepage, name='homepage'),
     path('sign_up', sign_up, name="register"),
-    path('sign_in', sign_in, name="sign_in"),
     path('prestto_admin', admin_page, name="prestto_admin"),
-    path('logout', admin_page, name="logout"),
+    path('prestto_admin/business_name/<pk>', business_name_detail, name="bn_detail"),
+    path('prestto_admin/ltd_rerquests', ltd_requests, name="ltd"),
+    path('logout', sign_out, name="logout"),
+    path('login', sign_in, name="login"),
 
 ]

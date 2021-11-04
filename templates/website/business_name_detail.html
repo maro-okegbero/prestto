@@ -1,0 +1,20 @@
+{% extends "dashboard_skeleton.html" %}
+{% load static %}
+
+
+{% block content %}
+ <section class="content">
+      <div class="container-fluid">
+          <p><b>PROPOSED BUSINESS NAME</b>: {{ application.proposed_business_name }}</p>
+          <p><b>PROPOSED COMPANY NAME</b>     : {{ application.proposed_company_name }}</p>
+          <p><b>BUSINESS ADDRESS</b>     : {{ application.business_address }}</p>
+          <p><b>BUSINESS EMAIL</b>     : {{ application.business_email }}</p>
+          <p><b>BUSINESS PHONE</b>     : {{ application.business_phone_number }}</p>
+          <p><b>BUSINESS COMMENCEMENT DATE</b>     : {{ application.business_commencement_date| date:"D d M Y" }}</p>
+          <p><b>NATURE OF BUSINESS</b>     : {{ application.nature_of_business }}</p>
+          <p><b>STATE</b>     : {{ application.state }} State</p>
+
+      </div>
+ </section>
+
+{% endblock  %}

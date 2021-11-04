@@ -138,7 +138,8 @@ class BusinessName(models.Model):
     business_address = models.CharField(max_length=1000, null=False, blank=False)
     state = models.CharField(max_length=100, null=False, blank=False)
     nature_of_business = models.TextField(max_length=1000, null=False, blank=False)
-    business_commencement_date = models.DateTimeField(null=False, blank=False)  # cannot be more than 40 days from the date_created
+    business_commencement_date = models.DateTimeField(null=False,
+                                                      blank=False)  # cannot be more than 40 days from the date_created
     is_individual_owner = models.BooleanField(null=False, blank=False)
     is_corporate_owner = models.BooleanField(null=False, blank=False)
     individual_owner = models.ForeignKey(IndividualOwner, on_delete=models.CASCADE, null=True)
@@ -146,3 +147,7 @@ class BusinessName(models.Model):
     attestee = models.ForeignKey(Attestee, on_delete=models.CASCADE, null=True)
     date_created = models.DateTimeField(default=timezone.now())
     last_created = models.DateTimeField(default=timezone.now())
+
+
+class LimitedLiability(models.Model):
+    pass

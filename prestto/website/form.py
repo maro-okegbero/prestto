@@ -61,8 +61,10 @@ class BusinessNameRegistration(forms.Form):
     """
 
     """
-    proposed_business_name = forms.CharField(max_length=500, required=False)  # the name the business will be called and  registered with legally
-    proposed_company_name = forms.CharField(max_length=500, required=False)  # the alternative if your proposed business name is unavailable
+    proposed_business_name = forms.CharField(max_length=500,
+                                             required=False)  # the name the business will be called and  registered with legally
+    proposed_company_name = forms.CharField(max_length=500,
+                                            required=False)  # the alternative if your proposed business name is unavailable
     business_phone_number = forms.CharField(max_length=12, required=False)  # the phone number
     business_email = forms.EmailField(max_length=12, required=False)
     business_address = forms.CharField(max_length=1000, required=False)
@@ -71,3 +73,12 @@ class BusinessNameRegistration(forms.Form):
     business_commencement_date = forms.DateField(required=False)  # cannot be more than 40 days from the date_created
     is_individual_owner = forms.BooleanField()
     is_corporate_owner = forms.BooleanField()
+
+
+class LoginUserForm(forms.Form):
+    username = forms.CharField(max_length=30, required=True,
+                               widget=forms.TextInput(
+                                   attrs={'name': "demo", "class": "form-control", "placeholder": "Username"}),
+                               label="Username")
+    password = forms.CharField(max_length=30, required=True, widget=forms.PasswordInput(
+        attrs={'name': "demo", "class": "form-control", "placeholder": "Password"}), label="Password")
