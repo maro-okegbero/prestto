@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY", 'django-insecure-$4w^ezkf!%hdc(v@^weorkb6&3(-@r2+^xx4jhu1h+7nb^09r9')
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -149,9 +149,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'website.User'
 
 cloudinary.config(
-    cloud_name=config("CLOUDINARY_CLOUD_NAME", "fmfkly8y798y97uhhkjjkj"),
-    api_key=config("CLOUDINARY_API_KEY", "7t6yg6877878jj"),
-    api_secret=config("CLOUDINARY_API_SECRET", "ftfyguiy86784qwsxfbo8u07rty"),
+    cloud_name=config("CLOUDINARY_CLOUD_NAME"),
+    api_key=config("CLOUDINARY_API_KEY"),
+    api_secret=config("CLOUDINARY_API_SECRET"),
 
 )
 
